@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1021">
+  <meta name="description" content="Kinetic is an AI assistant trained on physiotherapy textbooks, research papers, exam questions, and clinical cases. Join the student waitlist.">
+  <title>Kinetic | AI for Physiotherapy Students</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230b1021' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M16 8v16M8 16h16' stroke='%2338bdf8' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Navbar -->
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a href="#" class="logo" aria-label="Kinetic home">K<span>inetic</span></a>
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-nav-links"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <ul id="primary-nav-links" class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#top-books">Top Books</a></li>
+        <li><a href="#register" class="btn-primary">Join Waitlist</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-content">
+        <span class="badge">Coming Soon &bull; Built for Physiotherapy Students</span>
+        <h1>An AI trained on <span class="hero-highlight">physiotherapy</span>.<br>Not general internet noise.</h1>
+        <p class="hero-sub">
+          General chatbots skim the surface. Kinetic is fine-tuned on physiotherapy textbooks, research papers, exam questions, and clinical case studies — so it speaks your clinical language.
+        </p>
+        <div class="hero-actions">
+          <a href="#register" class="btn-hero">Get Notified When It Launches</a>
+          <a href="#top-books" class="btn-secondary">See Requested Books</a>
+        </div>
+      </div>
+      <div class="hero-stats" aria-label="Waitlist statistics">
+        <div class="stat">
+          <div class="stat-number" id="reg-count" aria-live="polite">--</div>
+          <div class="stat-label">students on waitlist</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-number">143K+</div>
+          <div class="stat-label">physio Q&amp;A pairs in training data</div>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <div class="stat-number" id="books-count" aria-live="polite">--</div>
+          <div class="stat-label">top textbooks tracked</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About -->
+    <section id="about" class="section about">
+      <div class="container">
+        <h2>Why a physiotherapy-specific model?</h2>
+        <div class="about-grid">
+          <article class="about-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <h3>Domain-specific knowledge</h3>
+            <p>Fine-tuned on musculoskeletal assessment, neurological rehab, cardiopulmonary physio, sports injuries, and evidence-based practice — not diluted by generic web content.</p>
+          </article>
+          <article class="about-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+            </div>
+            <h3>Exam &amp; case ready</h3>
+            <p>Trained on physiotherapy exam questions, real-life scenarios, and clinical case studies so it supports both written exams and practical reasoning.</p>
+          </article>
+          <article class="about-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <h3>Cited, sourced answers</h3>
+            <p>Responses reference core physiotherapy books and papers wherever possible — so you can verify every claim against your syllabus.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="section how-it-works">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num" aria-hidden="true">1</div>
+            <h3>You register</h3>
+            <p>Share your name, college, and up to two physiotherapy textbooks you want the AI to master.</p>
+          </div>
+          <div class="step">
+            <div class="step-num" aria-hidden="true">2</div>
+            <h3>We prioritize training</h3>
+            <p>Student votes directly shape which core textbooks and chapters we index and fine-tune first.</p>
+          </div>
+          <div class="step">
+            <div class="step-num" aria-hidden="true">3</div>
+            <h3>Early launch access</h3>
+            <p>You receive a launch notification when Kinetic goes live — with early access for waitlist cohorts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Requested Textbooks Leaderboard -->
+    <section id="top-books" class="section top-books">
+      <div class="container">
+        <div class="leaderboard-card">
+          <div class="leaderboard-header">
+            <div>
+              <h2>Most Requested Textbooks</h2>
+              <p>Live student demand from waitlist signups. Pick your favorites in the form below to boost them.</p>
+            </div>
+            <span class="live-pill"><span class="live-dot" aria-hidden="true"></span>Live stats</span>
+          </div>
+          <div id="top-books-container" aria-live="polite">
+            <p class="leaderboard-status">Loading most requested textbooks…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration -->
+    <section id="register" class="section register">
+      <div class="container">
+        <div class="register-card">
+          <div class="register-header">
+            <h2>Join the Waitlist</h2>
+            <p>Be the first to know when Kinetic launches. Tell us which books matter most to your cohort.</p>
+          </div>
+
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class="flash-messages" id="flash-messages" role="status" aria-live="polite" tabindex="-1">
+                {% for category, message in messages %}
+                  <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+
+          <div id="form-error-summary" class="flash flash-error form-error-summary" role="alert" aria-live="assertive" hidden></div>
+
+          <form action="/register" method="POST" class="register-form" id="register-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name <span class="required" aria-hidden="true">*</span></label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="e.g. Priya Sharma"
+                  autocomplete="name"
+                  required
+                  aria-required="true"
+                  aria-describedby="name-error"
+                >
+                <span class="field-error" id="name-error" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address <span class="required" aria-hidden="true">*</span></label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="e.g. priya@college.edu"
+                  autocomplete="email"
+                  required
+                  aria-required="true"
+                  aria-describedby="email-error"
+                >
+                <span class="field-error" id="email-error" role="alert" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="college">College / University <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="college"
+                name="college"
+                placeholder="e.g. All India Institute of Physical Medicine"
+                autocomplete="organization"
+                required
+                aria-required="true"
+                aria-describedby="college-error"
+              >
+              <span class="field-error" id="college-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="book-chips-panel">
+              <div class="book-chips-header">
+                <span class="book-chips-label" id="quick-pick-label">Quick-pick popular physio textbooks:</span>
+                <span class="book-chips-hint">Click to fill Book 1 or Book 2 (click again to clear)</span>
+              </div>
+              <div class="book-chips" role="group" aria-labelledby="quick-pick-label" id="book-chips"></div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group autocomplete-group">
+                <label for="book1">Book 1 you want the AI to master</label>
+                <input
+                  type="text"
+                  id="book1"
+                  name="book1"
+                  placeholder="e.g. Kisner &amp; Colby - Therapeutic Exercise"
+                  autocomplete="off"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-expanded="false"
+                  aria-controls="book1-suggestions"
+                  aria-describedby="book1-error"
+                >
+                <ul id="book1-suggestions" class="autocomplete-list" role="listbox" aria-label="Book 1 suggestions" hidden></ul>
+                <span class="field-error" id="book1-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group autocomplete-group">
+                <label for="book2">Book 2 you want the AI to master</label>
+                <input
+                  type="text"
+                  id="book2"
+                  name="book2"
+                  placeholder="e.g. Magee - Orthopedic Physical Assessment"
+                  autocomplete="off"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-expanded="false"
+                  aria-controls="book2-suggestions"
+                  aria-describedby="book2-error"
+                >
+                <ul id="book2-suggestions" class="autocomplete-list" role="listbox" aria-label="Book 2 suggestions" hidden></ul>
+                <span class="field-error" id="book2-error" role="alert" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submit-btn">Join Waitlist</button>
+          </form>
+          <p class="form-note">No spam. Launch notification only. You can opt out anytime.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="logo">K<span>inetic</span></div>
+      <p>Built for physiotherapy students. Trained on physio books, papers, and cases.</p>
+      <p class="footer-copy">&copy; 2026 Kinetic. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
