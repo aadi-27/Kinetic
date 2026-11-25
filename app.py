@@ -1,28 +1,44 @@
 """
-Kinetic Registration Site
-Flask backend: serves landing page, accepts registrations, stores to CSV.
-Run:  python3 app.py
+Kinetic Registration Site — Google Sheets backend
 """
 
-import csv
 import os
 from datetime import datetime, timezone
+from collections import Counter
+
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+import gspread
+from google.oauth2.service_account import Credentials
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-change-in-production")
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
-REGISTRATIONS_CSV = os.path.join(DATA_DIR, "registrations.csv")
-REGISTRATION_HEADERS = ["timestamp", "name", "email", "college", "book1", "book2"]
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+CREDENTIALS_FILE = os.environ.get("GOOGLE_CREDENTIALS_FILE", "credentials.json")
+SHEET_ID = "1HfsZCupnFxEoxY9o4Z5ZWsnka7B8JARToIR672sc0uw"
+
+HEADERS = ["timestamp", "name", "email", "college", "book1", "book2"]
 
 
-def ensure_csv():
-    os.makedirs(DATA_DIR, exist_ok=True)
-    if not os.path.exists(REGISTRATIONS_CSV):
-        with open(REGISTRATIONS_CSV, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=REGISTRATION_HEADERS)
-            writer.writeheader()
+def get_sheet():
+    creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
+    client = gspread.authorize(creds)
+    spreadsheet = client.open_by_key(SHEET_ID)
+    try:
+        sheet = spreadsheet.worksheet("Registrations")
+    except gspread.WorksheetNotFound:
+        sheet = spreadsheet.add_worksheet(title="Registrations", rows=1000, cols=6)
+        sheet.append_row(HEADERS)
+    return sheet
+
+
+def ensure_headers(sheet):
+    try:
+        first_row = sheet.row_values(1)
+    except Exception:
+        first_row = []
+    if not first_row or first_row != HEADERS:
+        sheet.insert_row(HEADERS, 1)
 
 
 @app.route("/", methods=["GET"])
@@ -32,7 +48,6 @@ def index():
 
 @app.route("/register", methods=["POST"])
 def register():
-    ensure_csv()
     name = request.form.get("name", "").strip()
     email = request.form.get("email", "").strip()
     college = request.form.get("college", "").strip()
@@ -47,18 +62,18 @@ def register():
         flash("Please enter a valid email address.", "error")
         return redirect(url_for("index"))
 
-    row = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "name": name,
-        "email": email,
-        "college": college,
-        "book1": book1,
-        "book2": book2,
-    }
+    sheet = get_sheet()
+    ensure_headers(sheet)
 
-    with open(REGISTRATIONS_CSV, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=REGISTRATION_HEADERS)
-        writer.writerow(row)
+    row = [
+        datetime.now(timezone.utc).isoformat(),
+        name,
+        email,
+        college,
+        book1,
+        book2,
+    ]
+    sheet.append_row(row)
 
     flash("Thanks! You're on the Kinetic waitlist. We'll let you know when it launches.", "success")
     return redirect(url_for("index"))
@@ -66,19 +81,18 @@ def register():
 
 @app.route("/api/stats", methods=["GET"])
 def stats():
-    """Simple JSON endpoint for a live counter on the landing page."""
-    ensure_csv()
-    count = 0
-    books = {}
-    with open(REGISTRATIONS_CSV, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            count += 1
-            for b in (row.get("book1", ""), row.get("book2", "")):
-                b = b.strip()
-                if b:
-                    books[b] = books.get(b, 0) + 1
-    top_books = sorted(books.items(), key=lambda x: x[1], reverse=True)[:5]
+    sheet = get_sheet()
+    records = sheet.get_all_records()
+    count = len(records)
+
+    books = Counter()
+    for r in records:
+        for b in (r.get("book1", ""), r.get("book2", "")):
+            b = b.strip()
+            if b:
+                books[b] += 1
+
+    top_books = [[book, count] for book, count in books.most_common(5)]
     return jsonify({"registrations": count, "top_books": top_books})
 
 
