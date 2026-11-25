@@ -219,48 +219,28 @@
               <span class="field-error" id="college-error" role="alert" aria-live="polite"></span>
             </div>
 
-            <div class="book-chips-panel">
-              <div class="book-chips-header">
-                <span class="book-chips-label" id="quick-pick-label">Quick-pick popular physio textbooks:</span>
-                <span class="book-chips-hint">Click to fill Book 1 or Book 2 (click again to clear)</span>
-              </div>
-              <div class="book-chips" role="group" aria-labelledby="quick-pick-label" id="book-chips"></div>
-            </div>
-
             <div class="form-row">
-              <div class="form-group autocomplete-group">
+              <div class="form-group">
                 <label for="book1">Book 1 you want the AI to master</label>
                 <input
                   type="text"
                   id="book1"
                   name="book1"
-                  placeholder="e.g. Kisner &amp; Colby - Therapeutic Exercise"
-                  autocomplete="off"
-                  role="combobox"
-                  aria-autocomplete="list"
-                  aria-expanded="false"
-                  aria-controls="book1-suggestions"
+                  placeholder="Type any physiotherapy textbook title here"
                   aria-describedby="book1-error"
                 >
-                <ul id="book1-suggestions" class="autocomplete-list" role="listbox" aria-label="Book 1 suggestions" hidden></ul>
                 <span class="field-error" id="book1-error" role="alert" aria-live="polite"></span>
               </div>
 
-              <div class="form-group autocomplete-group">
-                <label for="book2">Book 2 you want the AI to master</label>
+              <div class="form-group">
+                <label for="book2">Book 2 you want the AI to master (optional)</label>
                 <input
                   type="text"
                   id="book2"
                   name="book2"
-                  placeholder="e.g. Magee - Orthopedic Physical Assessment"
-                  autocomplete="off"
-                  role="combobox"
-                  aria-autocomplete="list"
-                  aria-expanded="false"
-                  aria-controls="book2-suggestions"
+                  placeholder="Type another book, or leave blank"
                   aria-describedby="book2-error"
                 >
-                <ul id="book2-suggestions" class="autocomplete-list" role="listbox" aria-label="Book 2 suggestions" hidden></ul>
                 <span class="field-error" id="book2-error" role="alert" aria-live="polite"></span>
               </div>
             </div>
